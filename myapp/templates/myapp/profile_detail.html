@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/myapp.css' %}">
+  </head>
+
+
+<body>
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a href="{% url 'myapp:detail' pk=request.user.profile.pk %}" class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">User profile</a>
+        <!-- Form -->
+        <span  class="mb-0 text-sm  font-weight-bold"><a style="color:white" href="{% url 'logout' %}">Logout</a></span>
+        <span  class="mb-0 text-sm  font-weight-bold"><a style="color:white" href="{% url 'index' %}">Home</span>
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  {% if not profile.profile_image  %}
+                  <img src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg" alt="">
+                  {% else %}
+                  <img alt="Image placeholder" src="{{ profile.profile_image.url }}">
+                  {% endif %}
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">{{request.user}}</span>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-settings-gear-65"></i>
+                <span>Settings</span>
+              </a>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-calendar-grid-58"></i>
+                <span>Activity</span>
+              </a>
+              <a href="../examples/profile.html" class="dropdown-item">
+                <i class="ni ni-support-16"></i>
+                <span>Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#!" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url({% static 'images/downloadjay.jpg' %}); background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+
+            {% if profile.user == request.user %}
+            <h1 class="display-2 text-white">Hello {{profile.name}} {{profile.surname}}</h1>
+            <p class="text-white mt-0 mb-5">This is your profile page. You can upload and delete posts and edit your profile</p>
+            <a href="{% url 'myapp:update' pk=profile.pk %}"><input class="btn btn-primary" style="background-color:#8F00FF" type="submit" name="" value="Update Profile"></a>
+
+            {% else %}
+            <h1 class="display-2 text-white">Welcome to {{profile.name}} {{profile.surname}}'s Profile Page</h1>
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                  <a href="#">
+                    {% if not profile.profile_image %}
+                    <img src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg" alt="">
+                    {% else %}
+                    <img src="{{ profile.profile_image.url }}" class="">
+                    {% endif %}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                {% if profile.user == request.user %}
+                <a href="{% url 'myapp:update' pk=profile.pk %}" class="btn btn-sm btn-info mr-4">Edit</a>
+                {% endif %}
+              </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+
+                    <div>
+                      <span class="heading">{{aa.count}}</span>
+                      <span class="description">Photos</span>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3>
+                  {{profile.name}} {{profile.surname}}<span class="font-weight-light">, {{profile.age}}</span>
+                </h3>
+                <h4>
+                  {{profile.city}},{{profile.country}}
+                </h4>
+
+                <hr class="my-4">
+                <h3>Bio</h3>
+                <p>{{profile.bio}}</p>
+
+                <a href="#">Show more</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card bg-secondary shadow">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">{{profile.name}}'s account</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+
+                <h6 class="heading-small text-muted mb-4">User information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-username">Username</label>
+                        <br>{{profile.user.username}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <br>{{profile.user.email}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <br>{{profile.name}}
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <br>{{profile.surname}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Address -->
+                  {% if profile.user == request.user %}
+                  <a href="{% url 'myapp:create2' %}"><input class="btn btn-sm btn-primary"  type="submit" name="" value="Create Posts"></a>
+                  {% endif %}
+
+                <h6 class="heading-small text-muted mb-4">Posts</h6>
+
+                <br>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    {% for i in aa %}
+
+                    <div style='height:300px' class="col-sm-4">
+
+
+
+                          <div class="card-profile-image">
+
+                            <img style='max-height:300px' class="rounded " src="{{ i.image.url }}" alt="">
+
+
+                          </div>
+                          <br>
+                            {% if profile.user == request.user %}
+                             <a href="{% url 'myapp:update2' id=i.pk %}"><span><p>&#10008</p></span></a>
+                            {% endif %}
+
+
+
+
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6 m-auto text-center">
+        <div class="copyright">
+          <p>Made with <a href="https://www.creative-tim.com/product/argon-dashboard" target="_blank">Argon Dashboard</a> by Creative Tim</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'shop/base.html' %}
+{% block body_block %}
+<div class="jumbotron" style="color:black;background-color:#E0FFFF">
+  <h2>
+
+      Registration
+
+
+  </h2>
+
+
+    <form  method="post">
+      <div style='color:black' class="form_group">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" style="background-color:#8F00FF" type="submit" >Submit</button>
+
+      </div>
+
+
+    </form>
+
+
+
+
+</div>
+
+{% endblock %}

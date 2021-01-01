@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <style>
+      *{
+        font-family: 'Quicksand', sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <nav style="background:rgba(0,0,0,0.1);" class="" role="navigation" aria-label="main navigation">
+
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a style="" href="{% url 'index' %}" class="navbar-item">
+            <h3 style="color:black">Home</h3>
+          </a>
+        </div>
+
+
+      </div>
+      </nav>
+
+
+    <!--new form-->
+<div class="col-lg-6 col-md-6 col-sm-3">
+
+</div>
+<section class="hero is-dark is-fullheight">
+      <div class="hero-body img-fluid" style="min-height: 600px; background-image:url({% static 'images/2.jpg' %}); background-size: cover;page-break-inside: avoid;">
+        <div class="container">
+          <div class="columns is-centered">
+
+            <div class="column is-5-tablet is-4-desktop is-3-widescreen" style="opacity:1">
+              <form  method="POST" enctype="multipart/form-data" class="box">
+                {% csrf_token %}
+                {% if not request.user.profile.id %}
+
+                <h1 class="has-text-centered mb-5 is-size-3">Create Profile</h1>
+                {% else %}
+                <h1 class="has-text-centered mb-5 is-size-3">Update Profile</h1>
+                {% endif %}
+
+
+                <div class="field">
+                  <label for="" class="label">Name</label>
+                  <div class="control has-icons-left">
+                    {{ form.name}}
+
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="" class="label">Surname</label>
+                  <div class="control has-icons-left">
+                    {{ form.surname }}
+
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="" class="label">Bio</label>
+                  <div class="control has-icons-left">
+                    {{ form.bio }}
+
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="" class="label">Image</label>
+                  <div class="control has-icons-left">
+                    {{ form.profile_image }}
+
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="" class="label">City</label>
+                  <div class="control has-icons-left">
+                    {{ form.city }}
+
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="" class="label">Country</label>
+                  <div class="control has-icons-left">
+                    {{ form.country }}
+
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="" class="label">Age</label>
+                  <div class="control has-icons-left">
+                    {{ form.age }}
+
+                  </div>
+                </div>
+
+
+
+                {% if not request.user.profile.id %}
+                <input class="btn btn-primary"  type="submit" name="" value="Create Profile">
+                {% else %}
+                <input class="btn btn-primary"  type="submit" name="" value="Update Profile">
+                {% endif %}
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+ </body>
+</html>

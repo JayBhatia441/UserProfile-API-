@@ -1,0 +1,26 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<div class="">
+
+
+
+
+
+
+
+  <form  method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+  
+
+  </form>
+
+
+
+</div>
+
+
+{% endblock %}

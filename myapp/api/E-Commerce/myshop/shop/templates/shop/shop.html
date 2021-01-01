@@ -1,0 +1,45 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+
+<div class="container">
+<div class="row">
+<div class="col-3">
+  <div class="border p-4 rounded mb-4">
+              <a href="{% url 'shop:category' %}"><h2 class="mb-3 h6 text-uppercase text-black d-block">Show All</h2></a>  
+              <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
+              <ul class="list-unstyled mb-0">
+                {% for i in category %}
+                <li class="mb-1"><a href="{% url 'shop:catlist' cats='Electronics' %}" class="d-flex"><span>{{i.name}}</span> <span class="text-black ml-auto"></span></a></li>
+               {% endfor %}
+              </ul>
+            </div>
+</div>
+<div class="col-9">
+  <div class="row">
+    {% for p in plist %}
+    <div class="col-4">
+      <div class="block-4 text-center border">
+        <figure class="block-4-image">
+          <a href="shop-single.html"><img src="{{p.image.url}}" alt="Image placeholder" class="img-fluid"></a>
+        </figure>
+        <div class="block-4-text p-4">
+          <h3><a href="shop-single.html">{{p.name}}</a></h3>
+          <p class="mb-0">Finding perfect products</p>
+          <p class="text-primary font-weight-bold">{{p.price}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+
+              </div>
+</div>
+
+</div>
+
+{% endblock %}

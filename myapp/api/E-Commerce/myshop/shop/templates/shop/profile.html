@@ -1,0 +1,148 @@
+{% extends 'shop/base.html' %}
+{% block body_block %}
+<h1 style='text-align:center'>Hello {{request.user}}</h1>
+
+<h2 style='text-align:center'> ALL YOUR ORDERS</h2>
+
+
+
+<div class="site-section">
+      <div class="container">
+         <h2>New Orders</h2>
+
+        <div class="row mb-5">
+          <form class="col-md-12" method="post">
+            <div class="site-blocks-table">
+              {% for i in order %}
+              {% if i.date.minute != d.minute %}
+
+
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="product-thumbnail">Order</th>
+
+                    <th class="product-thumbnail">Image</th>
+                    <th class="product-name">Product</th>
+                    <th class="product-price">Price</th>
+                    <th class="product-quantity">Quantity</th>
+                    <th class="product-price">Time Of Order</th>
+
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+
+
+
+
+
+                  <tr>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{i.transaction_id}}</h2>
+                    </td>
+
+                    <td class="product-thumbnail">
+                      <img src='{{i.product.image.url}}' alt="Image" class="img-fluid">
+                    </td>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{i.product}}</h2>
+                    </td>
+                    <td>{{i.total}} </td>
+                    <td>
+
+                      <h2 class="h5 text-black">{{i.quantity}}</h2>
+
+
+                    </td>
+                    <td>
+
+                      <h2 class="h5 text-black">{{i.date.day}} / {{i.date.month}} / {{i.date.year}}<br> {{i.date.hour}}:{{i.date.minute}}</h2>
+
+
+                    </td>
+
+
+
+
+                  </tr>
+
+                </tbody>
+              </table>
+              {% endif %}
+
+
+
+
+               {% endfor %}
+               <h2>Older Orders</h2>
+               {% for i in order %}
+               {% if i.date.minute == d.minute %}
+
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th class="product-thumbnail">Order</th>
+
+                    <th class="product-thumbnail">Image</th>
+                    <th class="product-name">Product</th>
+                    <th class="product-price">Price</th>
+                    <th class="product-quantity">Quantity</th>
+                    <th class="product-price">Time Of Order</th>
+
+
+                  </tr>
+                </thead>
+
+                <tbody>
+
+
+
+
+
+
+                  <tr>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{i.transaction_id}}</h2>
+                    </td>
+
+                    <td class="product-thumbnail">
+                      <img src='{{i.product.image.url}}' alt="Image" class="img-fluid">
+                    </td>
+                    <td class="product-name">
+                      <h2 class="h5 text-black">{{i.product}}</h2>
+                    </td>
+                    <td>{{i.total}} </td>
+                    <td>
+
+                      <h2 class="h5 text-black">{{i.quantity}}</h2>
+
+
+                    </td>
+                    <td>
+
+                      <h2 class="h5 text-black">{{i.date.day}} / {{i.date.month}} / {{i.date.year}}<br> {{i.date.hour}}:{{i.date.minute}}</h2>
+
+
+                    </td>
+
+
+
+
+
+                  </tr>
+
+                </tbody>
+              </table>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </form>
+        </div>
+
+
+
+{% endblock %}

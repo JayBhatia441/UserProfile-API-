@@ -1,0 +1,100 @@
+{% extends 'shop/base.html' %}
+
+{% block body_block %}
+<div class="bg-light py-3">
+     <div class="container">
+       <div class="row">
+         <div class="col-md-12 mb-0"><a href="{% url 'index' %}">Home</a> <span class="mx-2 mb-0">/</span> <a href="{% url 'shop:cart' %}">Cart</a> <span class="mx-2 mb-0">/</span> <strong class="text-black">Checkout</strong></div>
+       </div>
+     </div>
+   </div>
+
+   <div class="site-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-6">
+
+            <h2 class="h3 mb-3 text-black">Customer Details</h2>
+            <div class="p-3 p-lg-5 border">
+
+            <table class="table site-block-order-table mb-5">
+              <thead>
+                <th>Name</th>
+                <th>Email</th>
+              </thead>
+              <tbody>
+
+
+                <tr>
+                  <td> <strong class="mx-2"></strong> {{user.username}}</td>
+                  <td>
+                    {{user.email}}
+                  </td>
+                </tr>
+
+
+
+
+            </table>
+            </div>
+
+        </div>
+
+
+
+
+              <div class="col-md-6">
+                <h2 class="h3 mb-3 text-black">Your Order</h2>
+                <div class="p-3 p-lg-5 border">
+                  <table class="table site-block-order-table mb-5">
+                    <thead>
+                      <th>Product</th>
+                      <th>Total</th>
+                    </thead>
+                    <tbody>
+                      {% for i in final %}
+                      {% if i.ordered == False %}
+
+                      <tr>
+                        <td>{{i.product.name}} <strong class="mx-2">x</strong> {{i.quantity}}</td>
+                        <td>
+                          {% if i.total == 0 %}
+                          {{i.product.price}}
+                          {% else %}
+                          {{i.total}}
+                          {% endif %}
+                        </td>
+                      </tr>
+                        {% endif %}
+                      {% endfor %}
+
+
+
+                      <tr>
+
+
+                        <td class="text-black font-weight-bold"><strong>Order Total</strong></td>
+                        <td class="text-black font-weight-bold"><strong>{{ftotal}}</strong></td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="form-group">
+          <a href="{% url 'shop:form' %}"><button class="btn btn-primary btn-md py-3 btn-block">Place Order</button></a>
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}

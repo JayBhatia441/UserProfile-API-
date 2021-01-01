@@ -1,0 +1,21 @@
+
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<div class="" style="background-image:url({% static 'images/jn.jpg' %});background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;">
+
+    <h2>LOGIN</h2>
+    <form  method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary" style="background-color:#8F00FF" type="submit" >Login</button>
+
+    </form>
+
+
+</div>
+
+{% endblock %}

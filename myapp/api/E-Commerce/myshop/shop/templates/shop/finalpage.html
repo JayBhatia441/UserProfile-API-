@@ -1,0 +1,22 @@
+{% extends 'shop/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="site-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <i style='color:green' class="fa fa-check-circle fa_custom fa-5x" aria-hidden="true"></i>
+            <h2 class="display-3 text-black">Thank you!</h2>
+            <p class="lead mb-5">You order was successfuly completed.</p>
+            <p><a href="{% url 'index' %}" class="btn btn-sm btn-primary">Back to shop</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
